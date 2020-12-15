@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Starting</title>
+</head>
+<body>
+
+    <div id="app">
+        <!--Ensemble des actions dans Vuejs-->
+        <!-- {{ }} interpolation de texte-->
+        <h1>{{ title }}</h1>
+        <p>{{ introduction }}</p>
+        <!--attribut v-if pour la condition v-else ET/OU v-else-if -->
+        <h2 v-if="christmas">{{ subtitle }}</h2>
+        <!--Si pas de v-if le v-else seul sera ignoré-->
+        <h2 v-else-if="summer === 2">This is SUMMER</h2>
+        <h2 v-else-if="newYear === 2021">This is NEW YEAR</h2>
+        <!--le v-show marche comme la propriété display en css-->
+        <h3 v-show="sale">THIS IS SPARTA</h3>
+        <ul>
+            <li v-for="(item, index, key) in product" :key="key">item: {{ item }}, index: {{ index }}</li>
+        </ul>
+        <p>
+            <!-- v-on:event pour gérer les évenements js-->
+            <button v-on:click="count ++ ; alert(count)">CLICK {{ count }}</button>
+        </p>
+        <!-- v-model permet de faire une liaison bi-directionnelle -->
+        <input type="text" v-model="property">
+        <p v-if="property === 'code123'">
+            Votre code promo est ok!
+        </p>
+        <!--Autre façon de déclarer une méthode avec le computed
+        ça a implique que cela sera chargé au lancement de l'appli
+        mais ne sera PLUS rechargé après, le cycle de vie est donc
+        différent-->
+        <footer>{{ footerMessage }}</footer>
+        <!--v-bind va indiquer que l'attribut va être dynamique-->
+        <!--le v-bind peut être remplacé par :src par convention-->
+        <img v-bind:src="image" v-on:mouseover="count ++; alert(count)">
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

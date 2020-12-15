@@ -7,6 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .slide-enter-active{
+            animation: slide-down 0.5s;
+        }
+        .slide-leave-active{
+            animation: slide-down .5s reverse;
+        }
+        @keyframes slide-down{
+            0%{
+                transform: translateY(-1000px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+
 </head>
 <body>
     <div id="app">
@@ -18,29 +35,31 @@
                     ({{ cart.length }})
                     Panier</a>
             </div>
-            <div class="w3-right w3-border w3-hide w3-animate-top"
-                 v-bind:class="{'w3-show' : displayCart}">
-                <table class="w3-table w3-white">
-                    <tr>
-                        <th>Produit</th>
-                        <th>Prix</th>
-                    </tr>
-                    <tr v-for="product in cart">
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.price }}€</td>
-                    </tr>
-                    <tr>
-                        <td>Code promo</td>
-                        <td><input type="text" placeholder="code promo" v-model="property"></td>
-                    </tr>
-                    <tr>
-                        <th>Total</th>
-                        <th v-if="property === 'QUENTIN2020'">{{ totalPrice }} - {{ codePromo }} = {{ totalPrice - codePromo }}€</th>
-                        <th v-else>{{ totalPrice }}€</th>
-                    </tr>
+            <transition name="slide">
+                <div class="w3-right w3-border" v-show="displayCart">
+                    <table class="w3-table w3-white">
+                        <tr>
+                            <th>Produit</th>
+                            <th>Prix</th>
+                        </tr>
+                        <tr v-for="product in cart">
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.price }}€</td>
+                        </tr>
+                        <tr>
+                            <td>Code promo</td>
+                            <td><input type="text" placeholder="code promo" v-model="property"></td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <th v-if="property === 'QUENTIN2020'">{{ totalPrice }} - {{ codePromo }} = {{ totalPrice - codePromo }}€</th>
+                            <th v-else>{{ totalPrice }}€</th>
+                        </tr>
 
-                </table>
-            </div>
+                    </table>
+                </div>
+            </transition>
+
 
         </div>
 
